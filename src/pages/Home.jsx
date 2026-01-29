@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useState } from "react";
 import WelcomeAlert from "../components/WelcomeAlert";
 import Feeds from "./Feeds";

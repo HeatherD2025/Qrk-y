@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, Navbar } from 'react-bootstrap';
 import { logout } from "../features/auth/authSlice.js";

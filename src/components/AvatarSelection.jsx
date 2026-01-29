@@ -1,4 +1,3 @@
-import React from 'react'; 
 import { Form, Row, Col } from 'react-bootstrap';
 import { useState } from 'react';
 import avatar1 from '../assets/accountAvatarImages/avatar1.png';
