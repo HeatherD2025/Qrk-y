@@ -1,12 +1,46 @@
+
+.alertContainer {
+  position: fixed !important;
+  top: 12% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 101;
+}
 .welcomeAlert {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px !important;
+  width: 90%;
+  height: auto;
+  z-index: 100;
+  padding: 3rem !important;
+}
+.bs-alert-border-color {
+  border: none !important;
+}
+.welcomeAlertTextContainer {
   font-family: 'Inter', sans-serif;
   font-weight: 300;
   display: grid;
   justify-items: center;
-  padding: 5rem 0rem 5rem 0rem;
-  margin: 20% 0% 20% 0%;
-  z-index: 100;
-  position: sticky !important;
+  text-align: center;
+  border-radius: 16px !important;
+  background: rgb(233, 207, 186);
+  height: 18rem;
+  max-width: 100%;
+  min-width: 25%;
+  padding: 2rem 10rem 2rem 10rem;
+  margin: 20% 5% 20% 5%;
+}
+.btn-close {
+  position: absolute;
+  font-size: 2rem;
+  filter: invert(1) grayscale(100%) brightness(200%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 div.articleDescription,

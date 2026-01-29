@@ -1,42 +1,85 @@
-/* .feedContainer {
-  display: block;
-} */
-
-.articleTitle {
-  font-size: large;
+.feedsContainer {
+  padding: 2rem 5rem 5rem 5rem;
+  width: 100%;
+}
+.limitedFeedContainer {
+  height: 300rem; /* Set a fixed height */
+  overflow-y: auto;
+  z-index: 4;
+  margin-top: 5rem;
+}
+.feedHeader {
+  font-family: "Inter", sans-serif !important;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  font-size: xx-large;
+  background-color: rgba(57, 55, 55, 0.361);
+  backdrop-filter: blur(10px) !important; /* Adjust the pixel value for more/less blur */
+  border-radius: 10px !important;
+  box-shadow: 0 40px 30px rgba(0, 0, 0, 0.1) !important; 
+  height: 3rem;
+  width: 92%;
+  position: fixed;
+  justify-content: space-between;
+  z-index: 3;
+  display: flex;
+  flex-direction: row;    
+  flex-wrap: nowrap
+}
+.feedHeader1 {
+  margin: 0% 10% 0% 10.5%;
   color: white;
-}
-.articleImage {
-  width: 25%;
-}
-.articleDescription {
-  margin: 0rem 5rem 2rem 5rem;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 2rem;
-  font-size: small;
-  padding: 2rem 2rem 2rem 2rem;
+} 
+.feedHeader2 {
+  margin: 0% 19.5% 0% 10%;
+  color: white;
 }
 .spaceImageCard, .newsCard {
   box-shadow: 0 4px 8px rgba(0,0,0,0.7);
+  border: rgb(233, 207, 186) .5px solid;
   padding: 3rem 0rem 2rem 0rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center; 
 }
+
 img.spaceImage,img.articleImage {
   width: 100%;
   height: auto;
   max-width: 100%;
   display: block;
 }
-.spaceImageTitle {
-  font-size: large;
+.articleTitle, .spaceImageTitle {
   font-family: 'Inter', sans-serif;
+  font-size: large;
   font-weight: 200;
   color: white;
-
+}
+.articleImage {
+  width: 25%;
+}
+.articleDescription {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 200;
+  margin: 2rem 5rem 2rem 5rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 2rem;
+  font-size: small;
+  padding: 2rem 2rem 2rem 2rem;
 }
 .footer {
   padding: 2rem 0rem 5rem 0rem;
+}
+.btn-bd-primary {
+  font-family: 'Inter', sans-serif;
+  --bs-btn-font-weight: 200;
+  --bs-btn-color: #f9f6f6;
+  --bs-btn-bg: #7e719c;
+  --bs-btn-hover-color: #9b9797;
+  --bs-btn-hover-bg: hsl(260, 40%, 37%);
+  --bs-btn-hover-border-color: #170c69;
+  --bs-btn-active-bg: #4e1fb3;
+  --bs-btn-active-border-color: #4e1fb3;
 }

@@ -10,8 +10,17 @@ export const scienceNewsApi = createApi({
   }),
   endpoints: (builder) => ({
     getScienceArticles: builder.query({
-      query: ({ page = 1, pageSize = 10} = {}) =>
-        `everything?q=physics+OR+space+OR+astrophysics&language=en&page=${page}&pageSize=${pageSize}&sortBy=publishedAt&apiKey=${NEWS_API_KEY}`,
+      query: ({ pageSize = 100} = {}) => ({
+        url: 'everything',
+        params: {
+          q: 'science OR scientific',
+          language: "en",
+          page: 1,
+          pageSize,
+          sortBy: 'publishedAt',
+          apiKey: NEWS_API_KEY,
+        },
+      }),
     }),
     // getSpeciicScienceArticles: builder.query({
     //   query: ({articleUrl})

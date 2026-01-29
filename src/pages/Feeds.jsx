@@ -1,4 +1,3 @@
-import React from 'react';
 import NewsFeed from '../components/NewsFeed.jsx';
 import SpaceImagesFeed from '../components/SpaceImagesFeed.jsx';
 import '../styles/feeds.css';
@@ -6,7 +5,13 @@ import '../styles/feeds.css';
 const Feeds = () => {
   return (
     <>
-    <div className="container">
+    <div className="feedsContainer">
+      <div className="row">
+        <div className="feedHeader">
+          <p className="feedHeader1">Qrk-y News</p>
+          <p className="feedHeader2">Astronomy Picture of the Day</p>
+        </div>
+      </div>
       <div className="row">
         <div className="col-6 col-lg-4">
           <NewsFeed />

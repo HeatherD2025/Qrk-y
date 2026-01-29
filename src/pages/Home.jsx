@@ -8,10 +8,10 @@ const Home = () => {
   const [show, setShow] = useState(true);
 
   return (
-    <div className="animated-gradient">
+    <> 
       <WelcomeAlert />
       <Feeds />
-    </div>
+    </>
   );
 };
 

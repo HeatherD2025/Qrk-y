@@ -7,7 +7,7 @@ export default function WelcomeAlert() {
   
   return (
     <>
-
+     <div className="alertContainer">
       {/* When an alert is dismissed, the element is completely removed from the page structure. 
       If a keyboard user dismisses the alert using the close button, their focus will 
       suddenly be lost and, depending on the browser, reset to the start of the page/document. 
@@ -17,11 +17,28 @@ export default function WelcomeAlert() {
       does not receive focus, make sure to add tabindex="-1" to the element. */}
 
       {show && (
-        <Alert className="welcomeAlert" onClose={() => setShow(false)} dismissible>
-          <strong>Welcome to Qrk-y</strong> Your gateway to the latest in science
-          and space news!
+        <Alert 
+          className="welcomeAlert" 
+          onClose={() => setShow(false)} dismissible
+          style={{
+            backgroundColor: "rgba(25, 11, 11, 0.36)",
+            backdropFilter: "blur(10px)",
+            border: "rgb(233, 207, 186) 1px solid",
+          }}
+        >
+          <div className="welcomeAlertTextContainer">
+              <h1>Welcome to Qrk-y!</h1> 
+                <br />
+                  Your gateway to the latest in science and space news. 
+                  Explore articles on astrophysics, cosmology, latest discoveries, 
+                  and stunning space images from NASA and more.
+                <br />
+                (Registered user interaction still in development)
+          </div>
         </Alert>
       )}
+
+     </div>
 
     </>
   );

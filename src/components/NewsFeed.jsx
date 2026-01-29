@@ -1,42 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useGetScienceArticlesQuery } from "../features/feeds/scienceNewsApi.js";
 import { useGetSpaceArticlesQuery } from "../features/feeds/spaceNewsApi.js";
 import { getToken } from "../utils/tokenService.js";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/index.css";
+import "../styles/feeds.css";
 
 const NewsFeed = () => {
-  // state declarations
+  // // state declarations
   const [page, setPage] = useState(1);
   const [articlesShown, setArticlesShown] = useState([]);
-  const [hasToken, setHasToken] = useState(false);
+  // const [hasToken, setHasToken] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const loadMoreRef = useRef(null);
+
 
   // authNeeded check
-  useEffect(() => {
-    const token = getToken();
-    setHasToken(!!token);
-  }, []);
+  // useEffect(() => {
+  //   const token = getToken();
+  //   setHasToken(!!token);
+  // }, []);
 
   // data fetching hooks
   const {
     data: scienceData,
     isLoading: loadingScience,
     error: errorScience,
-  } = useGetScienceArticlesQuery({ page, pageSize: 60 });
+  } = useGetScienceArticlesQuery({ page, pageSize: 50 });
 
   const {
     data: spaceData,
     isLoading: loadingSpace,
     error: errorSpace,
-  } = useGetSpaceArticlesQuery({ page, pageSize: 40 });
+  } = useGetSpaceArticlesQuery({ page, pageSize: 50 });
 
   // button logic
   const handleLoadMore = () => {
-    setPage((prevPage) => prevPage + 1);
+    if (loading) return;
+    setLoading(true); 
+    setPage((prev) => prev + 1);
   };
 
   const handleArticleDetail = (articleUrl) => {
@@ -62,53 +67,71 @@ const NewsFeed = () => {
 
     if (
       scienceData &&
-      scienceData.articles?.length < 20 &&
+      scienceData.articles?.length < 30 &&
       spaceData &&
-      spaceData.results?.length < 20
+      spaceData.results?.length < 30
     ) {
       setHasMore(false);
     }
 
     setLoading(false);
-
-    console.log(
-      "Total fetched articles (articlesShown):",
-      articlesShown.length,
-    );
   }, [scienceData, spaceData]);
+
 
   // filtering
   const topics = [
+    "aerodynamics",
+    "aerolites",
+    "aerostatics",
+    "areology",
     "andromeda",
     "antineutrino",
     "antineutrinos",
     "antimatter",
     "antiprotons",
     "asteroid",
+    "astrobotany",
     "astronaut",
     "astronomy",
+    "astrophysics",
     "astonomer",
     "astonomers",
+    "atmospheric sciences",
     "atom",
     "atoms",
     "atomic",
+    "atmospheric sciences",
     "astrophysics",
     "astrophysists",
+    "barology",
     "boson",
+    "celestial mechanics",
     "CERN",
     "centauri",
     "cosmic",
     "cosmology",
     "comet",
+    "cometology",
+    "coniology",
     "electron",
+    "electrodynamics",
+    "electrohydrodynamics",
     "electromagnetic",
+    "electromagnetism",
+    "exobiology",
+    "exoplanetology",
     "fermilab",
     "galatic",
     "galaxy",
+    "genomics",
     "gluon",
     "gravity",
     "gravitational",
+    "gyrostatics",
     "Hawking",
+    "heliology",
+    "helioseismology",
+    "hermeology",
     "higgs",
     "hubble",
     "jupiter",
@@ -119,22 +142,34 @@ const NewsFeed = () => {
     "lepton",
     "light-years",
     "mars",
+    "magnetostatics",
     "mercury",
     "meteor",
+    "meteoritics",
+    "microbiology",
+    "molecular biology",
     "moon",
     "multiverse",
     "muon",
     "NASA",
     "near-earth",
     "nebula",
+    "necroplanetology",
     "neptune",
+    "neuroscience",
     "neutron",
     "neutrino",
+    "nuclear physics",
     "observatory",
     "oort cloud",
     "orbit",
+    "orbital mechanics",
+    "particle physics",
     "physics",
     "plasma",
+    "planetary science",
+    "planets",
+    "planet",
     "pluto",
     "photon",
     "proton",
@@ -143,60 +178,75 @@ const NewsFeed = () => {
     "quasar",
     "quantum",
     "quasiparticles",
+    "robotics",
     "saturn",
+    "selenodesy",
+    "selenology",
     "singularity",
     "solar",
     "space",
+    "spectrology",
+    "spectroscopy",
+    "stellar astronomy",
+    "stereochemistry",
     "subatomic",
     "supernova",
+    "supramolecular chemistry",
     "theory of relativity",
     "universe",
     "uranus",
+    "uranography",
     "venus",
     "wormhole",
+    "xenobiology",
+    "zenography",
   ];
 
   const unwantedPhrases = [
     "album",
     "amazon",
+    "annoying",
     "apparel",
     "arena",
+    "art",
     "bomb",
     "baskets",
     "bedroom",
-    "bought",
     "bulova",
-    "business",
-    "emotionally",
     "graphics",
     "buy",
-    "career",
     "CEO",
     "cloudflare",
-    "comic",
-    "comics",
-    "condo",
-    "Cogent",
+    "cogent",
     "combat",
     "comedian",
     "comedians",
+    "comic",
+    "comics",
+    "coming-of-age",
+    "commercial space",
+    "condo",
     "crypto",
+    "directed by",
     "discount",
-    "disease",
-    "elon",
+    "disk space",
     "episode",
     "ESPN",
+    "extravagant",
     "film",
+    "game",
+    "gameplay",
     "hiroshima",
-    "injured",
-    "injuries",
+    "horror",
     "investment",
     "IP",
     "katy",
+    "keychain",
     "kia",
     "killed",
     "kitchen",
     "lego",
+    "legions",
     "lion",
     "loan",
     "market",
@@ -205,24 +255,28 @@ const NewsFeed = () => {
     "meme",
     "movie",
     "nagasaki",
-    "neighbor",
     "officers",
     "pepe",
+    "personal space",
     "phone",
     "plot",
+    "precious space",
+    "prequel",
     "pricing",
     "prime",
-    "projector",
     "PS5",
     "python",
     "Re:",
     "realty",
     "retail",
+    "residents",
     "restaurant",
+    "review",
     "reviewers",
     "sandbox",
-    "screen",
+    "save space",
     "shoot",
+    "shooter",
     "show",
     "singer",
     "skyscraper",
@@ -230,12 +284,14 @@ const NewsFeed = () => {
     "smartwatch",
     "smartring",
     "smarthome",
-    "steam",
+    "space saver",
+    "space saving",
     "stock",
     "stocks",
+    "storage space",
     "street",
     "superman",
-    "trends",
+    "taking up space",
     "trailer",
     "wallet",
     "workspace",
@@ -251,7 +307,7 @@ const NewsFeed = () => {
     return true;
   });
 
-  // helper function
+  // helper function to escape special characters in phrases
   function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
@@ -264,7 +320,9 @@ const NewsFeed = () => {
       (article.description || "")
     ).toLowerCase();
 
+    // check for unwanted phrases first
     const containsUnwanted = unwantedPhrases.some((phrase) => {
+      // create a regex to match whole words only
       const regex = new RegExp(`\\b${escapeRegExp(phrase)}\\b`, "i");
       return regex.test(text);
     });
@@ -276,13 +334,39 @@ const NewsFeed = () => {
       const regex = new RegExp(`\\b${escapeRegExp(topic)}\\b`, "i");
       return regex.test(text);
     });
-
     if (!matchesTopic) {
       return false;
     }
-
     return true;
   });
+
+  // infinite scroll effect
+    useEffect(() => {
+    if (!loadMoreRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (
+          entry.isIntersecting && 
+          hasMore && 
+          !loading && 
+          !filteredArticles.length < 40
+        ) {
+          handleLoadMore();
+        }
+      },
+      {
+        root: null,
+        rootMargin: "200px",
+        threshold: 0,
+      }
+    );
+
+    observer.observe(loadMoreRef.current);
+
+    return () => observer.disconnect();
+  }, [hasMore, loading, filteredArticles.length]);
+
 
   // loading and error states
   if (loadingScience || loadingSpace) return <p>Loading articles...</p>;
@@ -290,45 +374,43 @@ const NewsFeed = () => {
 
   return (
     <>
-      <div className="background">
-        <p className="feedHeader">Qrk-y News</p>
+      <div className="limitedFeedContainer">
+        {filteredArticles.length === 0 && <p>No relevant articles found.</p>}
 
-        <div className="p-3">
-          {filteredArticles.length === 0 && <p>No relevant articles found.</p>}
-          {filteredArticles.map((article, index) => (
-            <div className="newsCard p-3" key={index}>
-              <p className="articleTitle">{article.title}</p>
-              {article.urlToImage && (
-                <img
-                  className="articleImage"
-                  src={article.urlToImage}
-                  alt={article.title}
-                  style={{ width: "40em", height: "auto" }}
-                />
-              )}
-              <p>{article.description}</p>
+        {filteredArticles.map((article, index) => (
+          <div className="newsCard p-3" key={index}>
+            <p className="articleTitle">{article.title}</p>
+            {article.urlToImage && (
+              <img
+                className="articleImage"
+                src={article.urlToImage}
+                alt={article.title}
+                style={{ width: "40em", height: "auto" }}
+              />
+            )}
+            <p>{article.description}</p>
 
-              {/* {hasToken ? (*/}
-              <a href={article.url} target="_blank" rel="noopener noreferrer">
-                <button
-                  onClick={() => handleArticleDetail(article.url)}
-                  className="btn btn-bd-primary"
-                >
-                  Read full article
-                </button>
-              </a>
-              {/*  ) : (
+            {/* {hasToken ? (*/}
+            <a href={article.url} target="_blank" rel="noopener noreferrer">
+              <button
+                onClick={() => handleArticleDetail(article.url)}
+                className="btn btn-bd-primary"
+              >
+                Read full article
+              </button>
+            </a>
+            {/*  ) : (
                   <p>Register or Log in to read this article</p>
                 )} */}
-            </div>
-          ))}
+          </div>
+        ))}
+        <div ref={loadMoreRef} style={{ height: "1px" }} />
 
-          {hasMore && (
-            <button onClick={handleLoadMore} className="btn btn-bd-primary">
-              load more articles
-            </button>
-          )}
-        </div>
+        {/* {hasMore && (
+          <button onClick={handleLoadMore} className="btn btn-bd-primary">
+            load more articles
+          </button>
+        )} */}
       </div>
     </>
   );
