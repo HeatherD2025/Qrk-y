@@ -8,8 +8,6 @@
 
 A science themed site that combines news and images from around the world and beyond.
 
-link to backend repository: https://github.com/HeatherD2025/QwRky
-
 ## Key Features
 
 - **Api Integration**: uses a combination of three apis as of 1/2026, with more to be added
