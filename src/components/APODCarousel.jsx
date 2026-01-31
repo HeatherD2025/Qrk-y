@@ -116,7 +116,7 @@ const APODCarousel = () => {
         {dateRangeImages.map((image) => (
             <Carousel.Item key={image.date}>
                 <img 
-                  className="d-block w-100 carouselImage"
+                  className="d-block"
                   src={image.url} 
                   alt={image.title}
                 />
