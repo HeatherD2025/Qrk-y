@@ -67,7 +67,7 @@ p {
   align-content: center;
 }
 .searchBarContainer {
-  padding-top: 20vh;
+  padding-top: 2vh;
   width: 40%;
   margin: auto;
   display: flex;
@@ -76,13 +76,13 @@ p {
   min-width: 200px;
 }
 .inputWrapper {
-  background-color: white;
+  background-color: rgb(222, 204, 174);
   width: 100%;
+  border-radius: 10px;
   height: 2.5rem;
-  border-radius: 10px;;
   padding: 0 15px;
   box-shadow: 0px 0px 8px #ddd;
-  display: flex;
+  display: block;
   align-items: center;
 }
 input {
@@ -93,14 +93,10 @@ input {
   width: 100%;
   margin-left: 5px;
 }
-
 input:focus {
   outline: none;
 }
 
-#search-icon {
-  color: royalblue;
-}
 /* .articleImage {
   width: 80rem;
 } */

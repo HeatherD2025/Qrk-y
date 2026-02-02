@@ -1,12 +1,17 @@
-import React from "react";
-import Image from "react-bootstrap/Image";
+import React, { useState } from "react";
 import { useGetSpaceImagesByDatesQuery } from "../../features/feeds/apodApi";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../../styles/index.css";
+// import "../../styles/index.css";
 import "../../styles/feeds.css";
-import { Carousel } from "react-bootstrap";
+import ReactModal from "react-modal";
+import APODCarouselView from "./APODCarouselView";
+
+ReactModal.setAppElement("#root");
 
 const APODCarousel = () => {
+  const [isFullscreen, setisFullscreen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+
   // fix later with useMemo()
   const today = new Date();
   const end_date = today.toISOString().slice(0, 10);
@@ -16,7 +21,7 @@ const APODCarousel = () => {
   const start_date = start.toISOString().slice(0, 10);
 
   const {
-    data: dateRangeSpaceImages,
+    data,
     isLoading,
     error,
   } = useGetSpaceImagesByDatesQuery({ start_date, end_date });
@@ -24,103 +29,42 @@ const APODCarousel = () => {
   if (isLoading) return <p>Loading images...</p>;
   if (error) return <p>Error loading images: {error.message}</p>;
 
-  const dateRangeImages = Array.isArray(dateRangeSpaceImages)
-    ? dateRangeSpaceImages
+  const images = Array.isArray(data)
+    ? data
     : [];
 
-  // button logic
-  // const handleLoadMore = () => {
-  //   if (loading) return;
-  //   setLoading(true);
-  //   setCount((prev) => prev + 15);
-  // };
-
-  // useEffect updates imagesShown when data changes
-  // everything downstream can assume dateRangeImages[index]
-  // useEffect(() => {
-  //   if (!dateRangeSpaceImages || dateRangeSpaceImages.length === 0) return;
-
-  // });
-
-  //   const dateRangeImages = Array.isArray(dateRangeSpaceImages)
-  //     ? dateRangeSpaceImages
-  //     : [];
-
-  //   const currentImage = dateRangeImages[imageIndex];
-
-  // function must know the current index
-  // and know the length of the date range array
-  //   const handleNextImage = () => {
-  //     setImageIndex((prevIndex) => {
-  //     if (prevIndex >= dateRangeImages.length - 1) return prevIndex;
-  //       return prevIndex + 1;
-  //     });
-  //   };
-
-  //   const handlePrevImage = () => {
-  //     setImageIndex((prevIndex) => {
-  //       if (prevIndex <= 0) return prevIndex;
-  //       return prevIndex - 1;
-  //     });
-  //   };
-
-  // const existingDates = new Set(dateRangeSpaceImages.map((img) => img.date));
-
-  // if (existingDates.length > 0) {
-  //   setImagesShown((prev) => [...prev, ...uniqueNewImages]);
-  // }
-
-  //   if (dateRangeImages.length < count) {
-  //     setHasMore(false);
-  //   }
-  //   setLoading(false);
-  // }, [dateRangeSpaceImages]);
-
-  // infinite scroll effect
-  //   useEffect(() => {
-  //   if (!loadMoreRef.current) return;
-
-  //   const observer = new IntersectionObserver(
-  //     ([entry]) => {
-  //       if (
-  //         entry.isIntersecting &&
-  //         hasMore &&
-  //         !loading &&
-  //         spaceImages &&
-  //         spaceImages.length < 40
-  //       ) {
-  //         handleLoadMore();
-  //       }
-  //     },
-  //     {
-  //       root: null,
-  //       rootMargin: "200px",
-  //       threshold: 0,
-  //     }
-  //   );
-
-  //   observer.observe(loadMoreRef.current);
-
-  //   return () => observer.disconnect();
-  // }, [hasMore, loading, spaceImages]);
+  const handleSelect = (selectedIndex) => {
+    setActiveIndex(selectedIndex);
+  };
 
   return (
     <>
-      <Carousel interval={null} indicators={false}>
-        {dateRangeImages.map((image) => (
-          <Carousel.Item key={image.date}>
-            <Image
-              className="d-block w-75"
-              src={image.url}
-              alt={image.title}
-              fluid
-            />
-            <Carousel.Caption>
-              <p>{image.title}</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-        ))}
-      </Carousel>
+      <APODCarouselView
+        id="fullscreenCarousel"
+        images={images}
+        activeIndex={activeIndex}
+        onSelect={handleSelect}
+        onFullscreen={() => setisFullscreen(true)}
+      />
+
+      <ReactModal
+        isOpen={isFullscreen}
+        onRequestClose={() => setisFullscreen(false)}
+        style={{
+          overlay: { backgroundColor: "black" },
+          content: { maxWidth: "90%", margin: "auto" }
+        }}
+      >
+        <ReactModal.Body>
+          <APODCarouselView
+            id="fullscreenCarousel"
+            images={images}
+            activeIndex={activeIndex}
+            onSelect={handleSelect}
+            isFullscreen
+          />
+        </ReactModal.Body>
+      </ReactModal>
     </>
   );
 };
