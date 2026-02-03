@@ -1,15 +1,14 @@
 import NewsFeed from "../components/NewsFeed/NewsFeed.jsx";
 // import APOD from '../components/APOD.jsx';
-import APODCarousel from "../components/NewsFeed/APODCarousel.jsx";
-import APODModal from "../components/APODModal.jsx";
+import APODCarouselContainer from "../components/NewsFeed/APODCarouselContainer.jsx";
 import "../styles/feeds.css";
 
 const Feeds = () => {
   return (
     <>
       <div className="mainNewsImagesContainer">
-        <div className="col-6 col-lg-8">
-          <APODCarousel />
+        <div className="col-6 col-lg-8 apod-container">
+          <APODCarouselContainer />
         </div>
 
         <div className="col-6 col-lg-4">
