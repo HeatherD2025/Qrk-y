@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// import 'dotenv/config';
 
 const SPACE_IMAGES_API_KEY = import.meta.env.VITE_NASA_API_KEY;
 

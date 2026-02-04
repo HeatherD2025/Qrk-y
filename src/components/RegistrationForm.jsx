@@ -76,7 +76,7 @@
 //         className="form-control me-2 my-3"
 //         required
 //       />
-//       {/* <div className="carouselWrapper" style={{width: "15rem", height: "15rem",}}>
+//       {/* <div className="carousel-wrapper" style={{width: "15rem", height: "15rem",}}>
 //           <AvatarCarousel handleChange={handleAvatarChange} />
 //       </div> */}
 

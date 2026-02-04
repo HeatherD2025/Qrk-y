@@ -37,12 +37,12 @@
 //   const avatarSource = matchedAvatar?.image || avatarList[0].image;
 
 //   return (
-//     <div className="accountPageContainer">
-//       <div className="backgroundContainer">
-//         <div className="mainInfoContainer">
-//           <div className="userAccountBoxHeader">{username || "User"}</div>
+//     <div className="account-page-container">
+//       <div className="background-container">
+//         <div className="main-info-container">
+//           <div className="user-account-box-header">{username || "User"}</div>
 
-//           <div className="avatarContainer">
+//           <div className="avatar-container">
 //             <img src={avatarSource} alt="User Avatar" className="user-avatar" />
 //           </div>
 

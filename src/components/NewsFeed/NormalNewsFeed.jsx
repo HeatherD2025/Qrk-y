@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useGetScienceArticlesQuery } from "../../features/feeds/scienceNewsApi.js";
 import { useGetSpaceArticlesQuery } from "../../features/feeds/spaceNewsApi.js";
+import { useGetTheNewsArticlesQuery } from "../../features/feeds/theNewsApi.js";
 import { getToken } from "../../utils/tokenService.js";
 import { useNavigate } from "react-router-dom";
 import ArticleCard from "./ArticleCard.jsx";
@@ -38,6 +39,12 @@ const NormalNewsFeed = () => {
     error: errorSpace,
   } = useGetSpaceArticlesQuery({ page, pageSize: 50 });
 
+  const {
+    data: theNewsData,
+    isLoading: loadingTheNews,
+    error: errorTheNews,
+  } = useGetTheNewsArticlesQuery({  });
+
   // button logic
   const handleLoadMore = () => {
     if (loading) return;
@@ -56,6 +63,7 @@ const NormalNewsFeed = () => {
     const newArticles = [
       ...(scienceData?.articles || []),
       ...(spaceData?.results || []), // spaceData uses `.results` not `.articles`
+      ...(theNewsData?.articles || []),
     ];
 
     const uniqueNewArticles = newArticles.filter(
@@ -70,13 +78,15 @@ const NormalNewsFeed = () => {
       scienceData &&
       scienceData.articles?.length < 30 &&
       spaceData &&
-      spaceData.results?.length < 30
+      spaceData.results?.length < 30 &&
+      theNewsData &&
+      theNewsData.results?.length < 30
     ) {
       setHasMore(false);
     }
 
     setLoading(false);
-  }, [scienceData, spaceData]);
+  }, [scienceData, spaceData, theNewsData]);
 
   // filtering
   const topics = [
@@ -368,32 +378,34 @@ const NormalNewsFeed = () => {
   }, [hasMore, loading, filteredArticles.length]);
 
   // loading and error states
-  if (loadingScience || loadingSpace) return <p>Loading articles...</p>;
-  if (errorScience || errorSpace) return <p>Error loading articles</p>;
+  if (loadingScience || loadingSpace || loadingTheNews)
+    return <p>Loading articles...</p>;
+  if (errorScience || errorSpace || errorTheNews)
+    return <p>Error loading articles</p>;
 
   return (
     <>
       {filteredArticles.length === 0 && <p>No relevant articles found.</p>}
 
-        {filteredArticles.map((article, index) => (
-            <ArticleCard 
-              key={index}
-              article={article}
-              onRead={handleArticleDetail}
-            />
-        //   <div className="newsCard p-3" key={index}>
-        //     <p className="articleTitle">{article.title}</p>
+      {filteredArticles.map((article, index) => (
+        <ArticleCard
+          key={index}
+          article={article}
+          onRead={handleArticleDetail}
+        />
+        //   <div className="news-card p-3" key={index}>
+        //     <p className="article-title">{article.title}</p>
 
         //     {article.urlToImage && (
         //       <img
-        //         className="articleImage"
+        //         className="article-image"
         //         src={article.urlToImage}
         //         alt={article.title}
         //         style={{ width: "40em", height: "auto" }}
         //       />
         //     )}
 
-        //     <p className="articleDescription">{article.description}</p>
+        //     <p className="article-description">{article.description}</p>
 
         //     {/* {hasToken ? (*/}
         //     <a href={article.url} target="_blank" rel="noopener noreferrer">
@@ -408,14 +420,14 @@ const NormalNewsFeed = () => {
         //           <p>Register or Log in to read this article</p>
         //         )} */}
         //   </div>
-        ))}
-        <div ref={loadMoreRef} style={{ height: "1px" }} />
+      ))}
+      <div ref={loadMoreRef} style={{ height: "1px" }} />
 
-        {hasMore && (
-          <button onClick={handleLoadMore} className="btn btn-bd-primary">
-            load more articles
-          </button>
-        )}
+      {hasMore && (
+        <button onClick={handleLoadMore} className="btn btn-bd-primary">
+          load more articles
+        </button>
+      )}
     </>
   );
 };

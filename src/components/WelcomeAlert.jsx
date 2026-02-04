@@ -7,7 +7,7 @@ export default function WelcomeAlert() {
   
   return (
     <>
-     <div className="alertContainer">
+     <div className="alert-container">
       {/* When an alert is dismissed, the element is completely removed from the page structure. 
       If a keyboard user dismisses the alert using the close button, their focus will 
       suddenly be lost and, depending on the browser, reset to the start of the page/document. 
@@ -18,7 +18,7 @@ export default function WelcomeAlert() {
 
       {show && (
         <Alert 
-          className="welcomeAlert" 
+          className="welcome-alert" 
           onClose={() => setShow(false)} dismissible
           style={{
             backgroundColor: "rgba(12, 12, 12, 0.36)",
@@ -26,8 +26,8 @@ export default function WelcomeAlert() {
             border: " rgb(246, 205, 147) 1px solid",
           }}
         >
-          <div className="welcomeAlertTextContainer">
-            <img className="alertBackgroundLogo"></img>
+          <div className="welcome-alert-text-container">
+            <img className="alert-background-logo"></img>
               <h1>Welcome to QwRky!</h1> 
                 <br />
                   Your gateway to the latest in science and space news. 

@@ -4,6 +4,7 @@ import { scienceNewsApi } from "../features/feeds/scienceNewsApi.js";
 import { userApi } from "../features/user/userApi.js";
 import { spaceNewsApi } from "../features/feeds/spaceNewsApi.js";
 import { spaceImagesApi } from "../features/feeds/apodApi.js";
+import { theNewsApi } from "../features/feeds/theNewsApi.js"; 
 
 const store = configureStore({
   reducer: {
@@ -12,13 +13,15 @@ const store = configureStore({
     [spaceNewsApi.reducerPath]: spaceNewsApi.reducer,
     [spaceImagesApi.reducerPath]: spaceImagesApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    [theNewsApi.reducerPath]: theNewsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(scienceNewsApi.middleware)
       .concat(spaceNewsApi.middleware)
       .concat(spaceImagesApi.middleware)
-      .concat(userApi.middleware),
+      .concat(userApi.middleware)
+      .concat(theNewsApi.middleware),
 });
 
 export default store;

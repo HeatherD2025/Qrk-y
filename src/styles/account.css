@@ -1,21 +1,21 @@
-.accountContainer {
+.account-container {
   width: 20x;
   height: 40px;
   background-color: black;
 }
-.accountPageContainer {
+.account-page-container {
   max-width: 1440px;
   display: grid;
   gap: 1rem;
   margin: 0, auto;
   grid-template-columns: repeat(16, 1fr);
 }
-.backgroundContainer {
+.background-container {
   background-color: rgb(19, 24, 32);
   height: 209.75rem;
   grid-column: 1 / span 16;
 }
-.mainInfoContainer {
+.main-info-container {
   border: 1px solid #ffffff74;
   background-color: rgb(225, 221, 221);
   max-width: 50rem;
@@ -25,7 +25,7 @@
   margin: auto;
   margin-top: 5rem;
 }
-.userAccountBoxHeader {
+.user-account-box-header {
   color: #14121c74;
   font-family: "Courier New", Courier, monospace;
   font-size: x-large;
@@ -34,7 +34,7 @@
   justify-content: center;
   margin-top: 2rem;
 }
-.formAvatar {
+.form-avatar {
   width: "80px";
   height: "80px";
 }

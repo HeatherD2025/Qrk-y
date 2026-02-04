@@ -14,10 +14,10 @@ const NewsFeed = () => {
 
   return (
     <>
-      <div className="newsFeedContainer">
-        <p className="feedHeader">QwRky Science News</p>
+      <div className="newsfeed-container">
+        <p className="feed-header">QwRky Science News</p>
 
-        <div className="searchBarContainer">
+        <div className="searchbar-container">
           <SearchBar
             setSearchResults={setSearchResults}
             setIsSearching={setIsSearching}

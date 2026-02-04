@@ -46,8 +46,8 @@ const {
 
     return (
         <>
-            <div className="searchBarContainer">
-                <div className="inputWrapper">
+            <div className="searchbar-container">
+                <div className="input-wrapper">
                     <FaSearch id="searchIcon"/>
                     <input 
                       placeholder="Type to search..." 

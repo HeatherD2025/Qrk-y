@@ -80,7 +80,7 @@ const SearchBar = ({ setSearchResults, setIsSearching }) => {
 
   return (
     <>
-      <div className="inputWrapper">
+      <div className="input-wrapper">
         <input
           placeholder="Type to search..."
           value={input}

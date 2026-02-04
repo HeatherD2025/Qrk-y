@@ -6,7 +6,7 @@ import "../styles/feeds.css";
 const Feeds = () => {
   return (
     <>
-      <div className="mainNewsImagesContainer">
+      <div className="main-news-images-container">
         <div className="col-6 col-lg-8 apod-container">
           <APODCarouselContainer />
         </div>

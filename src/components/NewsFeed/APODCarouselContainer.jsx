@@ -34,47 +34,18 @@ export default function APODCarouselContainer() {
   const openFullscreen = () => setFullscreen(true);
   const closeFullscreen = () => setFullscreen(false);
 
-//   const CarouselView = ({ fullscreenMode = false }) => (
-//     <Carousel
-//       activeIndex={activeIndex}
-//       onSelect={handleSelect}
-//       interval={null}
-//       indicators={false}
-//       controls={false}
-//     >
-//       {images.map((image) => (
-//         <Carousel.Item key={image.date}>
-//           <Image
-//             className={fullscreenMode ? "d-block w-100" : "d-block w-75"}
-//             src={image.url}
-//             alt={image.title}
-//           />
-//           <Carousel.Caption>
-//             <p>{image.title}</p>
-//             {!fullscreenMode && (
-//               <button
-//                 className="btn btn-sm btn-light mt-2"
-//                 onClick={openFullscreen}
-//               >
-//                 View Fullscreen
-//               </button>
-//             )}
-//           </Carousel.Caption>
-//         </Carousel.Item>
-//       ))}
-//     </Carousel>
-//   );
-
   return (
     <>
       {/* normal carousel */}
-      <APODCarouselView 
-        images={images}
-        activeIndex={activeIndex}
-        onSelect={handleSelect}
-        onFullscreen={openFullscreen}
-        isFullscreen={false}
-      />
+      {!fullscreen && (
+        <APODCarouselView
+            images={images}
+            activeIndex={activeIndex}
+            onSelect={handleSelect}
+            onFullscreen={openFullscreen}
+            isFullscreen={false}
+        />
+      )}
 
       {/* fullscreen modal carousel */}
       <ReactModal
@@ -87,13 +58,16 @@ export default function APODCarouselContainer() {
             padding: 20,
             background: "black",
             border: "none",
+            display: "flex",
+            flexDirection: "column",
           },
         }}
       >
-        <APODCarouselView 
+        <APODCarouselView
           images={images}
           activeIndex={activeIndex}
           onSelect={handleSelect}
+          onExitFullscreen={closeFullscreen}
           isFullscreen={true}
         />
       </ReactModal>

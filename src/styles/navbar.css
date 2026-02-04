@@ -1,4 +1,4 @@
-.qrkyLogo {
+.qrky-logo {
   margin-left: 2rem;
   height: 6rem;
 }
@@ -12,10 +12,10 @@
   top: 0 !important;
   z-index: 3;
 }
-.navbarContainer {
+.navbar-container {
   height: 6rem;
 }
-.navLink {  
+.nav-link {  
   font-family: 'Inter', sans-serif;
   font-weight: 200 !important;
   color: white !important;

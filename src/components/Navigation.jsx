@@ -21,23 +21,23 @@ const Navigation = () => {
 
   return (
     <>
-        <Navbar expand='lg' className='navbarContainer'>
+        <Navbar expand='lg' className='navbar-container'>
             <Navbar.Brand as={Link} to='/'>
               <img
                 src={logo}
                 alt='QwRky Logo'
-                className="qrkyLogo"
+                className="qrky-logo"
               />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls='basic-navbar-nav' />
             <Navbar.Collapse id='basic-navbar-nav'>
               <Nav className='me-auto'>
-                {/* <Nav.Link as={Link} to='/' className="navLink">
+                {/* <Nav.Link as={Link} to='/' className="nav-link">
                   Home
                 </Nav.Link> */}
               
                 {isAuthenticated && (
-                  <Nav.Link as={Link} to='/account' className="navLink">
+                  <Nav.Link as={Link} to='/account' className="nav-link">
                     Account
                   </Nav.Link>
                 )}

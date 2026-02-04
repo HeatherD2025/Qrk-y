@@ -20,18 +20,15 @@ const APODCarousel = () => {
   start.setDate(today.getDate() - 14);
   const start_date = start.toISOString().slice(0, 10);
 
-  const {
-    data,
-    isLoading,
-    error,
-  } = useGetSpaceImagesByDatesQuery({ start_date, end_date });
+  const { data, isLoading, error } = useGetSpaceImagesByDatesQuery({
+    start_date,
+    end_date,
+  });
 
   if (isLoading) return <p>Loading images...</p>;
   if (error) return <p>Error loading images: {error.message}</p>;
 
-  const images = Array.isArray(data)
-    ? data
-    : [];
+  const images = Array.isArray(data) ? data : [];
 
   const handleSelect = (selectedIndex) => {
     setActiveIndex(selectedIndex);
@@ -52,7 +49,7 @@ const APODCarousel = () => {
         onRequestClose={() => setisFullscreen(false)}
         style={{
           overlay: { backgroundColor: "black" },
-          content: { maxWidth: "90%", margin: "auto" }
+          content: { maxWidth: "90%", maxHeight: "90%", margin: "auto" },
         }}
       >
         <ReactModal.Body>

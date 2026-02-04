@@ -15,6 +15,10 @@ export const spaceNewsApi = createApi({
 
 export const { useGetSpaceArticlesQuery } = spaceNewsApi;
 
+
+
+
+
 // export const spaceNewsApi = createApi({
 //   reducerPath: 'spaceNewsApi',
 //   baseQuery: fetchBaseQuery({
